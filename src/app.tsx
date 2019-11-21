@@ -2,6 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+
 import DataFetcher from './components/data-fetcher'
 import Post from './components/post'
 import PostList from './components/post-list'
@@ -32,7 +33,7 @@ const Text = styled.span`
 const store = setupStore()
 
 class App extends React.PureComponent {
-  render() {
+  public render() {
     return (
       <Provider store={store}>
         <Router>
@@ -57,7 +58,7 @@ class App extends React.PureComponent {
     )
   }
 
-  navigateHome = () => window.location.href = '/'
+  public navigateHome = () => (window.location.href = '/')
 }
 
 export default App

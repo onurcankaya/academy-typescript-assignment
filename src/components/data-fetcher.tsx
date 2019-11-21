@@ -1,11 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { Dispatch } from 'redux'
 import { ApiService } from '../services/api-service'
 import { postsSet } from '../store/actions/posts'
 
-class DataFetcher extends React.PureComponent {
-  async componentDidMount() {
+interface StateProps extends ReturnType<typeof mapStateToProps> {}
+interface DispatchProps extends ReturnType<typeof mapDispatchToProps> {}
+
+type Props = StateProps & DispatchProps
+
+class DataFetcher extends React.PureComponent<Props> {
+  public async componentDidMount() {
     const { setPosts } = this.props
     const service = new ApiService()
     const posts = await service.fetchPosts()
@@ -13,15 +19,15 @@ class DataFetcher extends React.PureComponent {
     setPosts(posts)
   }
 
-  render() {
+  public render() {
     return this.props.children
   }
 }
 
 const mapStateToProps = () => ({})
 
-const mapDispatchToProps = (dispatch) => ({
-  setPosts: (posts) => dispatch(postsSet(posts)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setPosts: (posts: any) => dispatch(postsSet(posts)),
 })
 
 export default withRouter(

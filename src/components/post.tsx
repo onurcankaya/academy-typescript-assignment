@@ -1,10 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+
+import { State } from '../store'
 import { Header2, Section, Text } from './elements'
 
-class Post extends React.PureComponent {
-  render() {
+interface Post {
+  id: string
+  text: string
+  description: string
+  created: string
+}
+interface RouteParams {
+  id?: string
+}
+interface RouteProps extends RouteComponentProps<RouteParams> {}
+interface StateProps extends ReturnType<typeof mapStateToProps> {}
+
+type Props = StateProps & RouteComponentProps
+
+class Post extends React.PureComponent<Props> {
+  public render() {
     const { post } = this.props
 
     if (!post) {
@@ -31,8 +47,8 @@ class Post extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  post: state.posts.items.find((p) => p.id === props.match.params.id),
+const mapStateToProps = (state: State, props: RouteProps) => ({
+  post: state.posts.items.find((p: any) => p.id === props.match.params.id),
 })
 
 export default withRouter(connect(mapStateToProps)(Post))
