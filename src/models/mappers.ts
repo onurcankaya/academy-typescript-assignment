@@ -1,13 +1,7 @@
 import moment from 'moment'
+import { ApiPost, Post } from './post'
 
-interface Post {
-  id: string
-  text: string
-  description: string
-  created: string
-}
-
-export const toLocalPost = (post: Post) => ({
+export const toLocalPost = (post: ApiPost): Post => ({
   ...post,
   created: moment(post.created),
 })

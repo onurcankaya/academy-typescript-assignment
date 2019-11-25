@@ -1,3 +1,4 @@
+import { Post } from '../../models/post'
 import { Action, POSTS_CLEAR, POSTS_SET } from '../actions/posts'
 
 interface InitialStateTypes {
@@ -8,13 +9,6 @@ interface InitialStateTypes {
 const initialState: InitialStateTypes = {
   loading: true,
   items: [],
-}
-
-interface Post {
-  id: string
-  text: string
-  description: string
-  created: string
 }
 
 export interface State {

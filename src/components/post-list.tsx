@@ -1,20 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { State } from '../store'
 import { Header2, Link, Section } from './elements'
 
-interface Post {
-  id: string
-  text: string
-  description: string
-  created: string
-}
-
 interface StateProps extends ReturnType<typeof mapStateToProps> {}
 
-type Props = StateProps
+type Props = StateProps & RouteComponentProps
 
 class PostList extends React.PureComponent<Props> {
   public render() {
@@ -26,7 +19,7 @@ class PostList extends React.PureComponent<Props> {
           <Header2>PostList</Header2>
         </Section>
 
-        {posts.map((post: Post) => (
+        {posts.map((post) => (
           <Section key={post.id}>
             <Link to={`/post/${post.id}`}>{post.description}</Link>
           </Section>

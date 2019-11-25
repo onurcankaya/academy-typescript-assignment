@@ -5,12 +5,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { State } from '../store'
 import { Header2, Section, Text } from './elements'
 
-interface Post {
-  id: string
-  text: string
-  description: string
-  created: string
-}
 interface RouteParams {
   id?: string
 }
@@ -48,7 +42,7 @@ class Post extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: State, props: RouteProps) => ({
-  post: state.posts.items.find((p: any) => p.id === props.match.params.id),
+  post: state.posts.items.find((p) => p.id === props.match.params.id),
 })
 
 export default withRouter(connect(mapStateToProps)(Post))
